@@ -1,0 +1,44 @@
+{
+  "name": "d-rock-construction-backend",
+  "version": "1.0.0",
+  "description": "D-Rock Construction backend built with Sails.js and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "D-Rock Construction",
+    "Sails.js",
+    "MongoDB",
+    "Mongoose",
+    "Backend"
+  ],
+  "author": "Oriel G Silva Jr",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1",
+    "natural": "^8.0.1",
+    "openai": "^4.67.3",
+    "sails": "^1.5.9"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.0.1",
+    "@eslint/js": "^9.3.0",
+    "eslint": "^9.3.0",
+    "eslint-plugin-react": "^7.34.2",
+    "globals": "^15.3.0",
+    "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  }
+}
