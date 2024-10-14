@@ -1,8 +1,9 @@
 {
-  "name": "frontend",
-  "private": true,
+  "name": "d-rock-construction-frontend",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
+  "description": "Frontend application for D-Rock Construction LLC, showcasing services, projects, and providing a chatbot interface for customer inquiries. Built with React and Vite.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,9 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.3",
+    "@radix-ui/react-select": "^2.1.2",
     "axios": "^1.7.7",
     "dom": "^0.0.3",
     "lucide-react": "^0.451.0",
+    "nodemailer": "^6.9.15",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -33,5 +39,23 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.8"
-  }
+  },
+  "keywords": [
+    "D-Rock Construction",
+    "Construction Services",
+    "React",
+    "Vite",
+    "Chatbot",
+    "Customer Service"
+  ],
+  "author": "LatchyCat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LatchyCat/D-Rock-Construction-LLC.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LatchyCat/D-Rock-Construction-LLC/issues"
+  },
+  "homepage": "https://github.com/LatchyCat/D-Rock-Construction-LLC#readme"
 }

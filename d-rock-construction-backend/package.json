@@ -19,16 +19,26 @@
   "author": "Oriel G Silva Jr",
   "license": "ISC",
   "dependencies": {
+    "@tensorflow/tfjs-node": "^4.21.0",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
     "mongoose": "^8.7.1",
     "natural": "^8.0.1",
+    "node-schedule": "^2.1.1",
+    "nodemailer": "^6.9.15",
     "openai": "^4.67.3",
-    "sails": "^1.5.9"
+    "redis": "^4.7.0",
+    "sails": "^1.5.9",
+    "schedule": "^0.5.0",
+    "uuidv4": "^6.2.13",
+    "word2vec": "^1.1.5"
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.1",

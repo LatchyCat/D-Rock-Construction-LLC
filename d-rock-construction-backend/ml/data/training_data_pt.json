@@ -1,0 +1,106 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Olá!",
+          "Oi, como posso ajudar você hoje?",
+          "Bom dia! Bem-vindo ao nosso serviço.",
+          "Saudações! Como posso ajudar?",
+          "Bem-vindo à D-Rock Construction! Como podemos ajudar?",
+          "Ei! Pronto para discutir suas necessidades de construção?",
+          "Olá! Animado para ajudar com seu projeto de reforma."
+        ],
+        "responses": [
+          "Olá! Bem-vindo à D-Rock Construction. Como posso ajudar você hoje?",
+          "Saudações! Estou aqui para ajudar com todas as suas necessidades de construção. O que posso fazer por você?",
+          "Oi! Obrigado por entrar em contato com a D-Rock Construction. Como posso ser útil?"
+        ]
+      },
+      {
+        "tag": "support",
+        "patterns": [
+          "Preciso de ajuda com minha conta",
+          "Você pode me ajudar com um problema técnico?",
+          "Estou tendo dificuldades para fazer login",
+          "Há um problema com o cronograma do meu projeto",
+          "Preciso discutir mudanças no meu plano de construção",
+          "Você pode me ajudar a entender as licenças de construção?",
+          "Tenho dúvidas sobre os materiais que estão sendo usados"
+        ],
+        "responses": [
+          "Lamento saber que você está enfrentando problemas. Poderia fornecer mais detalhes sobre o problema?",
+          "Claro, ficarei feliz em ajudar. Pode me contar mais sobre o que está acontecendo?",
+          "Entendo que você precisa de assistência. Vamos resolver isso juntos. Com qual aspecto específico você está tendo dificuldades?"
+        ]
+      },
+      {
+        "tag": "inquiry",
+        "patterns": [
+          "Quais serviços vocês oferecem para reforma residencial?",
+          "Pode me falar sobre seus planos de preços?",
+          "Estou interessado em saber mais sobre sua empresa",
+          "Vocês lidam com trabalhos de acabamento externo personalizado?",
+          "Qual é a sua experiência com práticas de construção sustentável?",
+          "Podem fornecer exemplos de seus projetos anteriores?",
+          "O que diferencia a D-Rock Construction de outros empreiteiros?"
+        ],
+        "responses": [
+          "A D-Rock Construction é especializada em trabalhos de acabamento externo personalizado. Oferecemos uma variedade de serviços, incluindo...",
+          "Nossos preços são personalizados com base nas necessidades específicas do seu projeto. Ficaríamos felizes em fornecer um orçamento detalhado...",
+          "A D-Rock Construction está no mercado há mais de 20 anos, especializando-se em trabalhos externos de alta qualidade. Nos orgulhamos de..."
+        ]
+      },
+      {
+        "tag": "farewell",
+        "patterns": [
+          "Adeus, obrigado pela sua ajuda",
+          "Era só isso que eu precisava, tenha um ótimo dia!",
+          "Obrigado pela sua assistência, tchau!",
+          "Agradeço seu tempo, adeus",
+          "Obrigado pelas informações, entrarei em contato",
+          "Você foi muito prestativo, cuide-se",
+          "Estou ansioso para trabalhar com a D-Rock Construction, até logo"
+        ],
+        "responses": [
+          "Obrigado por considerar a D-Rock Construction. Esperamos poder trabalhar com você!",
+          "Foi um prazer ajudar você. Não hesite em entrar em contato se precisar de mais alguma coisa.",
+          "Obrigado pelo seu interesse na D-Rock Construction. Tenha um ótimo dia e esperamos ouvir de você em breve!"
+        ]
+      },
+      {
+        "tag": "quote_request",
+        "patterns": [
+          "Gostaria de obter um orçamento para trabalho de acabamento externo",
+          "Quanto custaria para renovar o exterior da minha casa?",
+          "Você pode me dar uma estimativa para um trabalho de acabamento personalizado?",
+          "Preciso de informações de preço para meu projeto de construção",
+          "Qual é o valor aproximado para refazer o acabamento externo da minha casa?",
+          "Como faço para obter um orçamento detalhado da D-Rock Construction?",
+          "É possível obter uma estimativa gratuita para minha reforma?"
+        ],
+        "responses": [
+          "Certamente! Ficaremos felizes em fornecer um orçamento. Para dar uma estimativa precisa, precisaremos de mais informações sobre seu projeto...",
+          "Claro! A D-Rock Construction oferece orçamentos gratuitos e detalhados. Para começar, poderia fornecer algumas informações básicas sobre seu projeto?",
+          "Absolutamente! Nós nos especializamos em orçamentos personalizados adaptados às suas necessidades específicas. Vamos reunir alguns detalhes sobre seu trabalho de acabamento externo..."
+        ]
+      },
+      {
+        "tag": "schedule_appointment",
+        "patterns": [
+          "Gostaria de agendar uma consulta",
+          "Quando alguém pode vir ver minha propriedade?",
+          "Como faço para marcar uma consulta com a D-Rock Construction?",
+          "É possível ter uma visita ao local esta semana?",
+          "Preciso marcar uma reunião com um de seus especialistas",
+          "Podemos agendar um horário para uma avaliação no local?",
+          "Qual é o processo para agendar uma avaliação de projeto?"
+        ],
+        "responses": [
+          "Certamente! Ficaríamos felizes em agendar uma consulta. Nossa equipe geralmente está disponível para visitas no local dentro dos próximos 3-5 dias úteis. Quais datas funcionam melhor para você?",
+          "Absolutamente! Podemos providenciar para que um de nossos especialistas visite sua propriedade. Para encontrar o melhor horário, poderia fornecer seus dias e horários preferidos?",
+          "Claro! Agendar uma avaliação de projeto é fácil. Temos vagas esta semana e na próxima. Quando seria mais conveniente para você?"
+        ]
+      }
+    ]
+  }

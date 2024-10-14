@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { getHomeData } from '../api/services';
-import Chatbot from '../components/Chatbot';
+import ChatComponent from '@/components/ChatComponent';
+import ContactForm from '../components/forms/ContactForm'
 
 const HomeView = () => {
   const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showChat, setShowChat] = useState(false);
+
+  useEffect(() => {
+    console.log('showChat state:', showChat);
+  }, [showChat])
 
   useEffect(() => {
     const fetchHomeData = async () => {
@@ -53,7 +59,24 @@ const HomeView = () => {
           <p><strong>Prices for Specialty Jobs:</strong> {homeData?.pricesPerSpecialtyJobs}</p>
         </div>
       </div>
-      <Chatbot />
+
+      <div className="mt-8">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+            console.log('Button clicked, toggling showChat');
+            setShowChat(prev => !prev);
+          }}
+        >
+          {showChat ? 'Hide Chat' : 'Show Chat'}
+        </button>
+      </div>
+
+      {showChat && (
+        <div className="mt-4">
+          <ChatComponent />
+        </div>
+      )}
     </div>
   );
 };

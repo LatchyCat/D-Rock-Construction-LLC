@@ -1,0 +1,106 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi there!",
+          "Hello, how can I help you today?",
+          "Good morning! Welcome to our service.",
+          "Greetings! How may I assist you?",
+          "Welcome to D-Rock Construction! How can we help?",
+          "Hey there! Ready to discuss your construction needs?",
+          "Hello! Excited to help with your home improvement project."
+        ],
+        "responses": [
+          "Hello! Welcome to D-Rock Construction. How can I assist you today?",
+          "Greetings! I'm here to help with all your construction needs. What can I do for you?",
+          "Hi there! Thanks for reaching out to D-Rock Construction. How may I be of service?"
+        ]
+      },
+      {
+        "tag": "support",
+        "patterns": [
+          "I need help with my account",
+          "Can you assist me with a technical issue?",
+          "I'm having trouble logging in",
+          "There's a problem with my project timeline",
+          "I need to discuss changes to my construction plan",
+          "Can you help me understand the building permits?",
+          "I have questions about the materials being used"
+        ],
+        "responses": [
+          "I'm sorry to hear you're experiencing issues. Could you please provide more details about the problem?",
+          "Of course, I'd be happy to help. Can you tell me more about what's going on?",
+          "I understand you need assistance. Let's work through this together. What specific aspect are you struggling with?"
+        ]
+      },
+      {
+        "tag": "inquiry",
+        "patterns": [
+          "What services do you offer for home renovation?",
+          "Could you tell me about your pricing plans?",
+          "I'm interested in learning more about your company",
+          "Do you handle custom exterior trim work?",
+          "What's your experience with sustainable building practices?",
+          "Can you provide examples of your past projects?",
+          "What sets D-Rock Construction apart from other contractors?"
+        ],
+        "responses": [
+          "D-Rock Construction specializes in custom exterior trim work. We offer a range of services including...",
+          "Our pricing is customized based on the specific needs of your project. We'd be happy to provide a detailed quote...",
+          "D-Rock Construction has been in business for over 20 years, specializing in high-quality exterior work. We pride ourselves on..."
+        ]
+      },
+      {
+        "tag": "farewell",
+        "patterns": [
+          "Goodbye, thank you for your help",
+          "That's all I needed, have a great day!",
+          "Thanks for your assistance, bye!",
+          "I appreciate your time, goodbye",
+          "Thanks for the information, I'll be in touch",
+          "You've been very helpful, take care",
+          "I look forward to working with D-Rock Construction, goodbye for now"
+        ],
+        "responses": [
+          "Thank you for considering D-Rock Construction. We look forward to potentially working with you!",
+          "It was a pleasure assisting you. Don't hesitate to reach out if you need anything else.",
+          "Thank you for your interest in D-Rock Construction. Have a great day, and we hope to hear from you soon!"
+        ]
+      },
+      {
+        "tag": "quote_request",
+        "patterns": [
+          "I'd like to get a quote for exterior trim work",
+          "How much would it cost to renovate my home's exterior?",
+          "Can you give me an estimate for a custom trim job?",
+          "I need pricing information for my construction project",
+          "What's the ballpark figure for redoing my house's exterior trim?",
+          "How do I go about getting a detailed quote from D-Rock Construction?",
+          "Is it possible to get a free estimate for my renovation?"
+        ],
+        "responses": [
+          "Certainly! We'd be happy to provide a quote. To give you an accurate estimate, we'll need some more information about your project...",
+          "Of course! D-Rock Construction offers free, detailed quotes. To get started, could you please provide some basic information about your project?",
+          "Absolutely! We specialize in custom quotes tailored to your specific needs. Let's gather some details about your exterior trim work..."
+        ]
+      },
+      {
+        "tag": "schedule_appointment",
+        "patterns": [
+          "I'd like to schedule a consultation",
+          "When can someone come to look at my property?",
+          "How do I book an appointment with D-Rock Construction?",
+          "Is it possible to have a site visit this week?",
+          "I need to set up a meeting with one of your experts",
+          "Can we arrange a time for an on-site evaluation?",
+          "What's the process for scheduling a project assessment?"
+        ],
+        "responses": [
+          "Certainly! We'd be glad to schedule a consultation. Our team is usually available for site visits within the next 3-5 business days. What dates work best for you?",
+          "Absolutely! We can arrange for one of our experts to visit your property. To find the best time, could you please provide your preferred days and times?",
+          "Of course! Scheduling a project assessment is easy. We have openings this week and next. When would be most convenient for you?"
+        ]
+      }
+    ]
+  }

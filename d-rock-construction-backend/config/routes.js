@@ -1,5 +1,3 @@
-// File: config/routes.js
-
 const express = require('express');
 const router = express.Router();
 
@@ -8,17 +6,31 @@ const JobRequestController = require('../api/controllers/JobRequestController');
 const ReviewController = require('../api/controllers/ReviewController');
 const UserController = require('../api/controllers/UserController');
 const HomeController = require('../api/controllers/HomeController');
+const ChatbotController = require('../api/controllers/chatbotController');
 const isAuthenticated = require('../api/policies/isAuthenticated');
-const chatbotController = require('../api/controllers/chatbotController');
+
+// Error handler middleware
+const handleErrors = (err, req, res, next) => {
+  console.error(err.stack);
+  if (!res.headersSent) {
+    res.status(500).json({ error: 'An error occurred', details: err.message });
+  }
+};
 
 // Home route
 router.get('/', HomeController.getHomeData);
 
 // Chatbot routes
-router.post('/api/chatbot/message', chatbotController.handleMessage);
-router.get('/api/chatbot/conversation/:id', chatbotController.getConversation);
-router.post('/api/chatbot/proactive', chatbotController.proactiveEngagement);
-router.post('/api/chatbot/faq', chatbotController.handleFAQ);
+router.post('/api/chat', ChatbotController.processMessage);
+router.post('/api/submit-form', ChatbotController.submitForm);
+
+router.post('/api/submit-quote', ChatbotController.submitQuote);
+router.post('/api/submit-callback', ChatbotController.submitCallback);
+
+// Add these routes if you need this functionality
+router.get('/api/chat/proactive-engagement', ChatbotController.getProactiveEngagement);
+router.get('/api/chat/model-performance', ChatbotController.getModelPerformance);
+
 
 // Auth routes
 router.post('/auth/register', AuthController.register);
@@ -45,5 +57,8 @@ router.get('/users', UserController.find);
 router.get('/users/:id', UserController.findOne);
 router.put('/users/:id', isAuthenticated, UserController.update);
 router.delete('/users/:id', isAuthenticated, UserController.destroy);
+
+// Apply error handler to all routes
+router.use(handleErrors);
 
 module.exports = router;

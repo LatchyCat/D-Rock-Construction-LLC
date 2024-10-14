@@ -9,7 +9,7 @@ const HomeController = {
         firstName: 'Wanderson',
         lastName: 'Rocha',
         phoneNumber: '843-302-2743',
-        email: 'D-ROCKCONSTRUCTION@hotmail.com',
+        email: 'drockconstructionllc1@gmail.com',
         hoursOfOperation: '8:00am to 5:30pm EST',
         fieldOfWork: 'Charleston County',
         specialties: 'Customized Exterior Trim',
@@ -27,4 +27,7 @@ const HomeController = {
   }
 };
 
+console.log('HomeController object:', HomeController);
+console.log('HomeController.getHomeData:', HomeController.getHomeData);
+console.log('Exporting HomeController:', HomeController);
 module.exports = HomeController;

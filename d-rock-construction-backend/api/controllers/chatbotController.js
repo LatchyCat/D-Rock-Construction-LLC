@@ -1,197 +1,253 @@
+const mongoose = require('mongoose');
 const Chatbot = require('../models/chatbot');
-const natural = require('natural');
+const EmailService = require('../services/EmailService');
 
-const BOT_NAME = "D-Rock Bot";
+const ChatbotController = {
+  processMessage: async function(req, res) {
+    try {
+      const { message, conversationId } = req.body;
 
-// Implement sentiment analysis
-const analyzer = new natural.SentimentAnalyzer("English", natural.PorterStemmer, "afinn");
+      let conversation;
+      if (conversationId) {
+        conversation = await Chatbot.findById(conversationId);
+        if (!conversation) {
+          return res.status(404).json({ error: 'Conversation not found' });
+        }
+      } else {
+        conversation = new Chatbot({
+          conversationType: 'unknown',
+          messages: [],
+          status: 'active'
+        });
+      }
 
-// Enhanced response generation with more personalization and dynamic content
-const generateResponse = (stage, userInput, customFields, sentiment) => {
-  const baseResponses = {
-    greeting: `Hey ${customFields.name || 'there'}, I'm ${BOT_NAME} from D-Rock Construction LLC. We're experts in custom exterior trim. How can I brighten your day with our services?`,
-    services: "We offer top-notch exterior trim solutions tailored just for you. Interested in our free quotes or want to hear about our latest projects?",
-    qualifying: "I'd love to hear more about your vision! Is this for a new build, a renovation, or perhaps a unique project you have in mind?",
-    collect_info: "Fantastic! To provide you with the best service, could I get your name, email, and best contact number? This helps us tailor our follow-up perfectly for you.",
-    next_steps: "Great! Let's find the perfect time for your free estimate. Would you prefer a morning appointment, afternoon, or early evening? We're flexible!",
-    wrap_up: `Thank you for choosing D-Rock Construction, ${customFields.name || 'valued customer'}! We're excited to bring your vision to life. Expect to hear from us very soon!`,
-    support_greeting: `Welcome back, ${customFields.name || 'valued customer'}! This is ${BOT_NAME} from D-Rock Construction LLC. How can I make your day better regarding your project?`,
-    project_status: "I'd be happy to check on that for you! Could you provide your project name or reference number? I'll fetch the latest updates right away.",
-    pricing_inquiry: "Pricing can vary based on the unique aspects of each project. To ensure you get the most accurate quote, may I confirm your contact details for a specialist to reach out?",
-    follow_up: "We want to keep you in the loop in the way that suits you best. Would you prefer updates via email, phone call, or perhaps text message?",
-    support_wrap_up: "It's been a pleasure assisting you today! D-Rock Construction values your business, and we'll be in touch very soon with the information you need.",
-    unknown: "I apologize, I didn't quite catch that. Could you please rephrase? I'm here to help with anything related to our exterior trim services or your ongoing projects."
-  };
+      conversation.addMessage('user', message);
 
-  // Add some variety based on sentiment
-  if (sentiment > 0) {
-    return `${baseResponses[stage]} I'm glad we're having such a positive conversation!`;
-  } else if (sentiment < 0) {
-    return `${baseResponses[stage]} I hope I can turn your experience around and make it a great one.`;
-  } else {
-    return baseResponses[stage];
-  }
-};
+      const intent = ChatbotController.classifyIntent(message);
+      const { botResponse, formFields } = ChatbotController.generateResponse(intent);
+      conversation.addMessage('bot', botResponse);
+      conversation.changeConversationType(intent);
 
-// Enhanced stage determination with NLP and intent recognition
-const determineNextStage = (currentStage, userInput, customFields) => {
-  const lowerInput = userInput.toLowerCase();
-  const tokenizer = new natural.WordTokenizer();
-  const tokens = tokenizer.tokenize(lowerInput);
+      await conversation.save();
 
-  const intents = {
-    quote: ['quote', 'price', 'cost', 'estimate'],
-    service: ['service', 'offer', 'provide', 'work'],
-    project: ['project', 'job', 'task', 'build', 'renovate'],
-    contact: ['contact', 'call', 'email', 'phone'],
-    schedule: ['schedule', 'appointment', 'meet', 'visit']
-  };
-
-  const matchIntent = (tokens, intents) => {
-    return Object.keys(intents).find(intent =>
-      intents[intent].some(keyword => tokens.includes(keyword))
-    );
-  };
-
-  const intent = matchIntent(tokens, intents);
-
-  switch (currentStage) {
-    case 'greeting':
-      if (intent === 'quote' || intent === 'service') return 'services';
-      if (intent === 'project') return 'qualifying';
-      return 'services';
-    case 'services':
-      if (intent === 'quote') return 'collect_info';
-      return 'qualifying';
-    case 'qualifying':
-      if (intent === 'contact' || tokens.includes('yes')) return 'collect_info';
-      return 'services';
-    case 'collect_info':
-      if (customFields.name && customFields.contact) return 'next_steps';
-      return 'collect_info';
-    case 'next_steps':
-      if (intent === 'schedule' || tokens.includes('yes')) return 'wrap_up';
-      return 'next_steps';
-    case 'support_greeting':
-      if (intent === 'project') return 'project_status';
-      if (intent === 'quote') return 'pricing_inquiry';
-      return 'follow_up';
-    case 'project_status':
-    case 'pricing_inquiry':
-      return 'follow_up';
-    case 'follow_up':
-      return 'support_wrap_up';
-    default:
-      return 'unknown';
-  }
-};
-
-exports.handleMessage = async (req, res) => {
-  try {
-    const { conversationType, message, customFields } = req.body;
-
-    let conversation = await Chatbot.findOne({ _id: req.body.conversationId });
-
-    if (!conversation) {
-      conversation = new Chatbot({
-        conversationType,
-        messages: [],
-        customFields: {}
-      });
-    }
-
-
-    // Perform sentiment analysis
-    const sentiment = analyzer.getSentiment(message.split(' '));
-
-    conversation.messages.push({
-      sender: 'user',
-      content: message,
-      sentiment: sentiment
-    });
-
-    if (customFields) {
-      Object.assign(conversation.customFields, customFields);
-    }
-
-    const currentStage = conversation.messages.length <= 1
-      ? (conversationType === 'prospecting' ? 'greeting' : 'support_greeting')
-      : conversation.messages[conversation.messages.length - 2].stage;
-
-    const nextStage = determineNextStage(currentStage, message, conversation.customFields);
-
-    const botResponse = await generateResponse(nextStage, message, conversation.customFields, sentiment);
-
-    conversation.messages.push({
-      sender: 'bot',
-      content: botResponse,
-      stage: nextStage
-    });
-
-    await conversation.save();
-
-    // Simulate typing delay based on response length
-    const typingDelay = Math.min(botResponse.length * 30, 3000);
-
-    setTimeout(() => {
       res.json({
-        message: botResponse,
-        conversationId: conversation._id,
-        stage: nextStage,
-        sentiment: sentiment
+        response: botResponse,
+        intent: intent,
+        formFields: formFields,
+        conversationId: conversation._id
       });
-    }, typingDelay);
-
-  } catch (error) {
-    console.error("Error in handleMessage:", error);
-    res.status(500).json({ error: 'An error occurred', details: error.message });
-  }
-};
-
-// New feature: Proactive engagement based on user behavior
-exports.proactiveEngagement = async (req, res) => {
-  try {
-    const { userId, pageVisited, timeSpent } = req.body;
-
-    if (timeSpent > 30 && !req.session.proactiveEngagement) {
-      const engagementMessage = "I noticed you've been browsing our services. Can I help you find anything specific or answer any questions about our exterior trim work?";
-      req.session.proactiveEngagement = true;
-      res.json({ message: engagementMessage });
-    } else {
-      res.json({ message: null });
+    } catch (error) {
+      console.error('Error in processMessage:', error);
+      res.status(500).json({ error: 'An error occurred while processing the message' });
     }
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred during proactive engagement' });
-  }
-};
+  },
 
-// New feature: FAQ handling
-exports.handleFAQ = async (req, res) => {
-  const faqs = {
-    "payment methods": "We accept all major credit cards, checks, and bank transfers. We also offer flexible payment plans for larger projects.",
-    "warranty": "We provide a 5-year warranty on all our exterior trim work, covering both materials and labor.",
-    "service area": "We primarily serve the Charleston County area, but we're open to discussing projects in neighboring counties as well.",
-    "timeline": "Project timelines vary based on scope, but we typically complete exterior trim work within 1-2 weeks from the start date."
-  };
+  submitForm: async function(req, res) {
+    try {
+      const { conversationId, formData, type } = req.body;
 
-  const userQuestion = req.body.question.toLowerCase();
-  const bestMatch = Object.keys(faqs).find(key => userQuestion.includes(key));
+      if (!process.env.CLIENT_EMAIL) {
+        return res.status(500).json({ error: 'Client email is not configured' });
+      }
 
-  if (bestMatch) {
-    res.json({ answer: faqs[bestMatch] });
-  } else {
-    res.json({ answer: "I'm sorry, I don't have a specific answer for that. Would you like me to connect you with one of our specialists?" });
-  }
-};
+      let conversation = await Chatbot.findById(conversationId);
+      if (!conversation) {
+        return res.status(404).json({ error: 'Conversation not found' });
+      }
 
-exports.getConversation = async (req, res) => {
-  try {
-    const conversation = await Chatbot.findById(req.params.id);
-    if (!conversation) {
-      return res.status(404).json({ error: 'Conversation not found' });
+      // Update conversation type based on the form type
+      conversation.conversationType = type === 'quote_request' ? 'request_quote' : 'schedule_callback';
+
+      conversation.updateInfo(formData);
+      conversation.status = 'completed';
+      await conversation.save();
+
+      const { emailSubject, emailBody } = ChatbotController.prepareEmail(conversation, formData);
+
+      try {
+        await EmailService.sendEmail(process.env.CLIENT_EMAIL, emailSubject, emailBody);
+      } catch (emailError) {
+        console.error('Error sending email:', emailError);
+      }
+
+      res.json({ message: 'Form submitted successfully. We will contact you soon.', conversationId: conversation._id });
+    } catch (error) {
+      console.error('Error in submitForm:', error);
+      res.status(500).json({ error: 'An error occurred while submitting the form' });
     }
-    res.json(conversation);
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+  },
+
+  submitCallback: async function(req, res) {
+    try {
+      const { conversationId, formData } = req.body;
+
+      if (!formData.preferredDate || !formData.preferredTime) {
+        return res.status(400).json({ error: 'Missing required fields for callback request' });
+      }
+
+      let conversation;
+      if (conversationId) {
+        conversation = await Chatbot.findById(conversationId);
+        if (!conversation) {
+          return res.status(404).json({ error: 'Conversation not found' });
+        }
+      } else {
+        conversation = new Chatbot({
+          conversationType: 'schedule_callback',
+          messages: [],
+          status: 'completed'
+        });
+      }
+
+      conversation.changeConversationType('schedule_callback');
+      conversation.updateCustomerInfo({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone
+      });
+      conversation.updateCallbackInfo({
+        preferredDate: formData.preferredDate,
+        preferredTime: formData.preferredTime
+      });
+      conversation.status = 'completed';
+      await conversation.save();
+
+      const { emailSubject, emailBody } = ChatbotController.prepareEmail(conversation, formData);
+
+      try {
+        await EmailService.sendEmail(process.env.CLIENT_EMAIL, emailSubject, emailBody);
+      } catch (emailError) {
+        console.error('Error sending email:', emailError);
+        return res.status(500).json({ error: 'An error occurred while sending the email notification' });
+      }
+
+      res.json({ message: 'Callback request submitted successfully. We will contact you soon.', conversationId: conversation._id });
+    } catch (error) {
+      console.error('Error in submitCallback:', error);
+      res.status(500).json({ error: 'An error occurred while submitting the callback request' });
+    }
+  },
+
+  submitQuote: async function(req, res) {
+    try {
+      const { conversationId, formData } = req.body;
+
+      if (!formData.projectType || !formData.projectDescription) {
+        return res.status(400).json({ error: 'Missing required fields for quote request' });
+      }
+
+      let conversation;
+      if (conversationId) {
+        conversation = await Chatbot.findById(conversationId);
+        if (!conversation) {
+          return res.status(404).json({ error: 'Conversation not found' });
+        }
+      } else {
+        conversation = new Chatbot({
+          conversationType: 'request_quote',
+          messages: [],
+          status: 'completed'
+        });
+      }
+
+      conversation.changeConversationType('request_quote');
+      conversation.updateCustomerInfo({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone
+      });
+      conversation.updateQuoteInfo({
+        projectType: formData.projectType,
+        projectDescription: formData.projectDescription,
+        estimatedBudget: formData.estimatedBudget
+      });
+      conversation.status = 'completed';
+      await conversation.save();
+
+      const { emailSubject, emailBody } = ChatbotController.prepareEmail(conversation, formData);
+
+      try {
+        await EmailService.sendEmail(process.env.CLIENT_EMAIL, emailSubject, emailBody);
+      } catch (emailError) {
+        console.error('Error sending email:', emailError);
+        return res.status(500).json({ error: 'An error occurred while sending the email notification' });
+      }
+
+      res.json({ message: 'Quote request submitted successfully. We will contact you soon.', conversationId: conversation._id });
+    } catch (error) {
+      console.error('Error in submitQuote:', error);
+      res.status(500).json({ error: 'An error occurred while submitting the quote request' });
+    }
+  },
+
+
+
+  // Helper methods
+  classifyIntent: function(message) {
+    const lowercaseMessage = message.toLowerCase();
+    if (lowercaseMessage.includes('quote') || lowercaseMessage.includes('estimate')) {
+      return 'request_quote';
+    } else if (lowercaseMessage.includes('schedule') || lowercaseMessage.includes('call back')) {
+      return 'schedule_callback';
+    }
+    return 'unknown';
+  },
+
+
+  generateResponse: function(intent) {
+    switch (intent) {
+      case 'request_quote':
+        return {
+          botResponse: "Great! I can help you request a quote. Please provide the following information:",
+          formFields: ['name', 'email', 'phone', 'projectType', 'projectDescription', 'estimatedBudget']
+        };
+      case 'schedule_callback':
+        return {
+          botResponse: "Certainly! I'd be happy to help you schedule a callback. Please provide the following information:",
+          formFields: ['name', 'phone', 'email', 'preferredDate', 'preferredTime']
+        };
+      default:
+        return {
+          botResponse: "Welcome! I'm here to help you request a quote or schedule a callback. Which would you like to do?",
+          formFields: []
+        };
+    }
+  },
+
+  prepareEmail: function(conversation, formData) {
+    if (conversation.conversationType === 'schedule_callback') {
+      return {
+        emailSubject: 'New Callback Request',
+        emailBody: `A new customer has requested to schedule a call back:
+          Name: ${conversation.customerInfo.name || 'N/A'}
+          Phone: ${conversation.customerInfo.phone || 'N/A'}
+          Email: ${conversation.customerInfo.email || 'N/A'}
+          Preferred Date: ${conversation.callbackInfo.preferredDate || 'N/A'}
+          Preferred Time: ${conversation.callbackInfo.preferredTime || 'N/A'}`
+      };
+    } else if (conversation.conversationType === 'request_quote') {
+      return {
+        emailSubject: 'New Quote Request',
+        emailBody: `A new customer has requested a quote for a project:
+          Name: ${conversation.customerInfo.name || 'N/A'}
+          Email: ${conversation.customerInfo.email || 'N/A'}
+          Phone: ${conversation.customerInfo.phone || 'N/A'}
+          Project Type: ${conversation.quoteInfo.projectType || 'N/A'}
+          Project Description: ${conversation.quoteInfo.projectDescription || 'N/A'}
+          Estimated Budget: ${conversation.quoteInfo.estimatedBudget || 'N/A'}`
+      };
+    }
+  },
+
+  getProactiveEngagement: async function(req, res) {
+    // Implementation for proactive engagement
+    res.json({ message: 'Proactive engagement feature is under development' });
+  },
+
+  getModelPerformance: async function(req, res) {
+    // Implementation for model performance
+    res.json({ message: 'Model performance feature is under development' });
   }
 };
+
+module.exports = ChatbotController;

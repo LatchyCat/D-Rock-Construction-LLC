@@ -1,0 +1,106 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "¡Hola!",
+          "Hola, ¿cómo puedo ayudarte hoy?",
+          "¡Buenos días! Bienvenido a nuestro servicio.",
+          "¡Saludos! ¿En qué puedo ayudarte?",
+          "¡Bienvenido a D-Rock Construction! ¿Cómo podemos ayudar?",
+          "¡Hola! ¿Listo para discutir tus necesidades de construcción?",
+          "¡Hola! Emocionado de ayudar con tu proyecto de mejora del hogar."
+        ],
+        "responses": [
+          "¡Hola! Bienvenido a D-Rock Construction. ¿Cómo puedo ayudarte hoy?",
+          "¡Saludos! Estoy aquí para ayudarte con todas tus necesidades de construcción. ¿Qué puedo hacer por ti?",
+          "¡Hola! Gracias por contactar a D-Rock Construction. ¿En qué puedo servirte?"
+        ]
+      },
+      {
+        "tag": "support",
+        "patterns": [
+          "Necesito ayuda con mi cuenta",
+          "¿Puedes ayudarme con un problema técnico?",
+          "Estoy teniendo problemas para iniciar sesión",
+          "Hay un problema con el cronograma de mi proyecto",
+          "Necesito discutir cambios en mi plan de construcción",
+          "¿Puedes ayudarme a entender los permisos de construcción?",
+          "Tengo preguntas sobre los materiales que se están utilizando"
+        ],
+        "responses": [
+          "Lamento escuchar que estás experimentando problemas. ¿Podrías proporcionar más detalles sobre el problema?",
+          "Por supuesto, estaré encantado de ayudar. ¿Puedes contarme más sobre lo que está pasando?",
+          "Entiendo que necesitas ayuda. Vamos a resolverlo juntos. ¿Con qué aspecto específico estás teniendo dificultades?"
+        ]
+      },
+      {
+        "tag": "inquiry",
+        "patterns": [
+          "¿Qué servicios ofrecen para la renovación del hogar?",
+          "¿Podrías hablarme de sus planes de precios?",
+          "Estoy interesado en saber más sobre su empresa",
+          "¿Se encargan de trabajos de molduras exteriores personalizadas?",
+          "¿Cuál es su experiencia con prácticas de construcción sostenible?",
+          "¿Pueden proporcionar ejemplos de sus proyectos anteriores?",
+          "¿Qué distingue a D-Rock Construction de otros contratistas?"
+        ],
+        "responses": [
+          "D-Rock Construction se especializa en trabajos de molduras exteriores personalizadas. Ofrecemos una variedad de servicios que incluyen diseño personalizado, instalación de alta calidad y acabados duraderos...",
+          "Nuestros precios se personalizan según las necesidades específicas de tu proyecto. Estaríamos encantados de proporcionarte un presupuesto detallado después de discutir tus requisitos...",
+          "D-Rock Construction lleva más de 20 años en el negocio, especializándose en trabajos exteriores de alta calidad. Nos enorgullecemos de nuestra atención al detalle, nuestro compromiso con la satisfacción del cliente y nuestra experiencia en proyectos de todo tipo y tamaño..."
+        ]
+      },
+      {
+        "tag": "farewell",
+        "patterns": [
+          "Adiós, gracias por tu ayuda",
+          "Eso es todo lo que necesitaba, ¡que tengas un buen día!",
+          "Gracias por tu asistencia, ¡adiós!",
+          "Aprecio tu tiempo, adiós",
+          "Gracias por la información, estaré en contacto",
+          "Has sido muy útil, cuídate",
+          "Espero trabajar con D-Rock Construction, adiós por ahora"
+        ],
+        "responses": [
+          "¡Gracias por considerar a D-Rock Construction! Esperamos poder trabajar contigo.",
+          "Ha sido un placer ayudarte. No dudes en contactarnos si necesitas algo más.",
+          "Gracias por tu interés en D-Rock Construction. ¡Que tengas un gran día y esperamos saber de ti pronto!"
+        ]
+      },
+      {
+        "tag": "quote_request",
+        "patterns": [
+          "Me gustaría obtener un presupuesto para trabajos de molduras exteriores",
+          "¿Cuánto costaría renovar el exterior de mi casa?",
+          "¿Pueden darme una estimación para un trabajo de molduras personalizado?",
+          "Necesito información de precios para mi proyecto de construcción",
+          "¿Cuál es el precio aproximado para rehacer las molduras exteriores de mi casa?",
+          "¿Cómo puedo obtener un presupuesto detallado de D-Rock Construction?",
+          "¿Es posible obtener una estimación gratuita para mi renovación?"
+        ],
+        "responses": [
+          "¡Por supuesto! Estaremos encantados de proporcionarte un presupuesto. Para darte una estimación precisa, necesitaremos más información sobre tu proyecto...",
+          "¡Claro! D-Rock Construction ofrece presupuestos detallados y gratuitos. Para empezar, ¿podrías proporcionarnos alguna información básica sobre tu proyecto?",
+          "¡Absolutamente! Nos especializamos en presupuestos personalizados adaptados a tus necesidades específicas. Vamos a recopilar algunos detalles sobre tu trabajo de molduras exteriores..."
+        ]
+      },
+      {
+        "tag": "schedule_appointment",
+        "patterns": [
+          "Me gustaría programar una consulta",
+          "¿Cuándo puede alguien venir a ver mi propiedad?",
+          "¿Cómo reservo una cita con D-Rock Construction?",
+          "¿Es posible tener una visita al sitio esta semana?",
+          "Necesito concertar una reunión con uno de sus expertos",
+          "¿Podemos organizar un momento para una evaluación en el sitio?",
+          "¿Cuál es el proceso para programar una evaluación del proyecto?"
+        ],
+        "responses": [
+          "¡Claro! Estaremos encantados de programar una consulta. Nuestro equipo suele estar disponible para visitas al sitio dentro de los próximos 3-5 días hábiles. ¿Qué fechas te vienen mejor?",
+          "¡Absolutamente! Podemos organizar que uno de nuestros expertos visite tu propiedad. Para encontrar el mejor momento, ¿podrías proporcionarnos tus días y horarios preferidos?",
+          "¡Por supuesto! Programar una evaluación del proyecto es fácil. Tenemos disponibilidad esta semana y la próxima. ¿Cuándo sería más conveniente para ti?"
+        ]
+      }
+    ]
+  }

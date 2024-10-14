@@ -1,0 +1,153 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi", "Hey", "Hello", "Good day", "Greetings", "What's up", "How are you?",
+          "Is anyone there?", "Good morning", "Good afternoon", "Good evening"
+        ],
+        "responses": [
+          "Hello! How can I assist you with D-Rock Construction today?",
+          "Hi there! Welcome to D-Rock Construction. How may I help you?",
+          "Greetings! What can I do for you regarding our construction services?",
+          "Good day! I'm here to help with any construction-related questions. What can I do for you?",
+          "Hello and welcome! How can D-Rock Construction be of service today?"
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": [
+          "Bye", "See you later", "Goodbye", "Take care", "I'm leaving", "Have a good day",
+          "Talk to you later", "I have to go", "That's all for now"
+        ],
+        "responses": [
+          "Goodbye! Thank you for considering D-Rock Construction.",
+          "Have a great day! Feel free to contact us again if you need anything.",
+          "Take care! We appreciate your interest in our services.",
+          "Thanks for chatting with us. Don't hesitate to reach out if you have more questions!",
+          "Wishing you all the best. Remember, D-Rock Construction is here when you need us!"
+        ]
+      },
+      {
+        "tag": "services",
+        "patterns": [
+          "What services do you offer?", "What kind of construction work do you do?",
+          "Can you tell me about your services?", "What projects do you handle?",
+          "Do you do residential work?", "Are you involved in commercial construction?",
+          "What types of buildings do you construct?"
+        ],
+        "responses": [
+          "D-Rock Construction offers a wide range of services including residential and commercial construction, renovations, and custom builds.",
+          "Our services include new construction, remodeling, additions, and specialty projects for both homes and businesses.",
+          "We provide comprehensive construction services from initial design to final build, including project management and custom solutions.",
+          "D-Rock specializes in both residential and commercial projects, including new builds, renovations, and expansions.",
+          "From small home improvements to large-scale commercial developments, we handle all types of construction projects."
+        ]
+      },
+      {
+        "tag": "quote",
+        "patterns": [
+          "Can I get a quote?", "How much do your services cost?", "I need a price estimate",
+          "What's your pricing like?", "How do I get a bid for my project?",
+          "Is there a fee for estimates?", "How much would it cost to build a house?"
+        ],
+        "responses": [
+          "Certainly! To provide an accurate quote, we'd need more details about your project. Would you like to schedule a consultation?",
+          "We'd be happy to give you a quote. Could you please provide more information about your construction needs?",
+          "For a detailed quote, it's best to discuss your project specifics. Shall we set up a call or in-person meeting?",
+          "Our quotes are customized based on project requirements. Let's arrange a meeting to discuss your needs in detail.",
+          "We offer free initial consultations to understand your project and provide accurate estimates. When would you like to meet?"
+        ]
+      },
+      {
+        "tag": "contact",
+        "patterns": [
+          "How can I contact you?", "What's your phone number?", "Where are you located?",
+          "Do you have an email address?", "What's your website?", "How do I reach customer service?",
+          "Is there a contact form on your website?"
+        ],
+        "responses": [
+          "You can reach us at (555) 123-4567 or email us at info@drocksconstruction.com. Our office is located at 123 Builder's Lane, Construction City.",
+          "Feel free to call us at (555) 123-4567 or visit our website at www.drocksconstruction.com for more contact options.",
+          "We're available by phone at (555) 123-4567 or you can drop by our office at 123 Builder's Lane, Construction City. What's the best way for you?",
+          "Our customer service team is available at (555) 123-4567. You can also use the contact form on our website www.drocksconstruction.com.",
+          "For immediate assistance, call (555) 123-4567. For less urgent matters, email us at info@drocksconstruction.com or use our online contact form."
+        ]
+      },
+      {
+        "tag": "timeline",
+        "patterns": [
+          "How long does a project usually take?", "What's the timeline for construction?",
+          "When can you start?", "How quickly can you complete a project?",
+          "Do you have any current availability?", "What's your typical turnaround time?"
+        ],
+        "responses": [
+          "Project timelines vary depending on the scope and complexity. Small renovations might take weeks, while large builds can take several months.",
+          "We can typically start new projects within 2-4 weeks of contract signing. The completion time depends on the project size and specifications.",
+          "Our team works efficiently to complete projects on time. We'd be happy to provide a more specific timeline after learning about your project details.",
+          "We pride ourselves on meeting deadlines. Once we understand your project, we can give you a detailed timeline with key milestones.",
+          "Availability varies throughout the year. Let's discuss your project so we can check our current schedule and provide an accurate start date."
+        ]
+      },
+      {
+        "tag": "materials",
+        "patterns": [
+          "What kind of materials do you use?", "Are your materials eco-friendly?",
+          "Do you source materials locally?", "Can I choose my own materials?",
+          "Do you use high-quality materials?", "What brands do you work with?"
+        ],
+        "responses": [
+          "We use a variety of high-quality materials from trusted suppliers. We're happy to discuss specific brands and types based on your preferences.",
+          "D-Rock Construction is committed to using durable, eco-friendly materials whenever possible. We can provide options that align with green building practices.",
+          "We source materials from both local and national suppliers to ensure the best quality and value for our clients.",
+          "Absolutely! We encourage client input on material selection. We can guide you through options that fit your style and budget.",
+          "Our team works with top brands in the industry. We can recommend materials based on your project needs and preferences."
+        ]
+      },
+      {
+        "tag": "portfolio",
+        "patterns": [
+          "Can I see examples of your work?", "Do you have a portfolio?",
+          "What projects have you completed recently?", "Any before and after photos?",
+          "Have you worked on projects similar to mine?", "What's your most impressive project?"
+        ],
+        "responses": [
+          "Certainly! You can view our portfolio on our website at www.drocksconstruction.com/portfolio. It showcases a variety of our residential and commercial projects.",
+          "We'd be happy to show you examples of our work. Our portfolio includes before and after photos of recent renovations and new constructions.",
+          "Our team has worked on diverse projects. We can share case studies of projects similar to what you have in mind. Would you like us to email you some examples?",
+          "We're proud of all our projects! Our website features a gallery of our work, including our award-winning designs. Feel free to browse and let us know if any catch your eye.",
+          "We regularly update our portfolio with recent projects. I'd be glad to arrange a presentation of our work that's most relevant to your interests."
+        ]
+      },
+      {
+        "tag": "process",
+        "patterns": [
+          "What's your construction process like?", "How do you handle projects?",
+          "What are the steps involved in building?", "How do you ensure quality?",
+          "Do you oversee the entire project?", "How involved will I be in the process?"
+        ],
+        "responses": [
+          "Our process typically involves initial consultation, design phase, permitting, construction, and final walk-through. We ensure clear communication at every step.",
+          "We follow a structured approach: planning, design, pre-construction, construction, and post-construction. Each phase is carefully managed to ensure quality and efficiency.",
+          "Quality is our top priority. We have rigorous quality control measures, regular inspections, and we only work with skilled professionals.",
+          "D-Rock Construction oversees the entire project from start to finish. We coordinate all aspects, including subcontractors, to ensure a smooth process.",
+          "We encourage client involvement throughout the process. You'll be kept informed and consulted on key decisions, but we handle all the complex details."
+        ]
+      },
+      {
+        "tag": "warranty",
+        "patterns": [
+          "Do you offer any warranties?", "What kind of guarantee do you provide?",
+          "How long is your workmanship warranty?", "What's covered under your warranty?",
+          "Do you have a satisfaction guarantee?", "What if something goes wrong after completion?"
+        ],
+        "responses": [
+          "We offer a comprehensive warranty on our workmanship. Typically, this covers any defects in our work for a period of 1-2 years after project completion.",
+          "D-Rock Construction provides a satisfaction guarantee. If any issues arise from our work, we'll address them promptly at no additional cost within the warranty period.",
+          "Our warranty covers workmanship-related issues. Material warranties are typically provided by the manufacturers, and we'll help you understand and claim these if needed.",
+          "We stand behind our work with a solid warranty. The specific terms can vary by project type, so we'll provide detailed warranty information in your contract.",
+          "Your peace of mind is important to us. We offer a warranty on our work and are always available to address any concerns, even after project completion."
+        ]
+      }
+    ]
+  }

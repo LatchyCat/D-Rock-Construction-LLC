@@ -1,0 +1,75 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi",
+          "Hello",
+          "Hey there",
+          "Good morning",
+          "Good afternoon"
+        ],
+        "responses": [
+          "Hello! How can I assist you with your construction project today?",
+          "Hi there! Welcome to D-Rock Construction. How may I help you?",
+          "Greetings! What can we do for you today?"
+        ]
+      },
+      {
+        "tag": "quote_request",
+        "patterns": [
+          "I need a quote",
+          "How much does it cost?",
+          "Can you give me an estimate?",
+          "What's the price for a project?"
+        ],
+        "responses": [
+          "We'd be happy to provide a quote. Could you please provide more details about your project?",
+          "Sure, we can give you an estimate. What type of construction work are you looking for?",
+          "To give you an accurate quote, we'll need some information about your project. Can you tell me more?"
+        ]
+      },
+      {
+        "tag": "schedule_appointment",
+        "patterns": [
+          "I want to schedule an appointment",
+          "When can you start?",
+          "Are you available next week?",
+          "Can we set up a meeting?"
+        ],
+        "responses": [
+          "We'd be glad to schedule an appointment. What date works best for you?",
+          "Sure, let's set up a meeting. Do you prefer weekdays or weekends?",
+          "We can definitely arrange that. When would you like us to come by?"
+        ]
+      },
+      {
+        "tag": "inquiry",
+        "patterns": [
+          "What services do you offer?",
+          "Do you do residential projects?",
+          "Can you handle commercial construction?",
+          "What types of projects do you work on?"
+        ],
+        "responses": [
+          "We offer a wide range of construction services including residential and commercial projects. What type of work are you interested in?",
+          "D-Rock Construction specializes in both residential and commercial construction. Could you tell me more about your specific needs?",
+          "Our services cover everything from home renovations to large-scale commercial projects. What kind of construction are you looking for?"
+        ]
+      },
+      {
+        "tag": "complaint",
+        "patterns": [
+          "I'm not happy with the work",
+          "There's a problem with my project",
+          "This isn't what I expected",
+          "I want to file a complaint"
+        ],
+        "responses": [
+          "I'm sorry to hear that you're not satisfied. Can you provide more details about the issue so we can address it promptly?",
+          "We take all feedback seriously. Could you explain the problem you're experiencing? We'll do our best to resolve it.",
+          "I apologize for any inconvenience. Let's discuss the issue in detail so we can make it right."
+        ]
+      }
+    ]
+  }
