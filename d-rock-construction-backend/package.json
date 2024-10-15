@@ -1,7 +1,7 @@
 {
   "name": "d-rock-construction-backend",
   "version": "1.0.0",
-  "description": "D-Rock Construction backend built with Sails.js and MongoDB",
+  "description": "D-Rock Construction backend built with Express.js and MongoDB",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -11,7 +11,7 @@
   },
   "keywords": [
     "D-Rock Construction",
-    "Sails.js",
+    "Express.js",
     "MongoDB",
     "Mongoose",
     "Backend"
@@ -39,7 +39,6 @@
     "nodemailer": "^6.9.15",
     "openai": "^4.67.3",
     "redis": "^4.7.0",
-    "sails": "^1.5.9",
     "schedule": "^0.5.0",
     "uuidv4": "^6.2.13",
     "word2vec": "^1.1.5"

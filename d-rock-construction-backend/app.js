@@ -6,7 +6,7 @@ const fs = require('fs');
 const { dbConnect } = require('./config/mongoose.config');
 const createCoolDesign = require('./emojis/emojisFunc');
 const routes = require('./config/routes');
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://192.168.1.193:5173,https://d-rock-construction-llc.onrender.com').split(',');
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://192.168.1.193:5173,https://d-rock-construction-llc.onrender.com,https://latchycat.github.io').split(',');
 
 console.log('Environment variables loaded:', process.env.MONGODB_URI ? 'Yes' : 'No');
 console.log('Current working directory:', process.cwd());
