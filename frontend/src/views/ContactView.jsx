@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, MessageCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
-import { Textarea } from "../components/ui/TextArea";
+import { TextArea } from "../components/ui/TextArea";
 import { Button } from '../components/ui/Button';
 import ChatComponent from '../components/ChatComponent';
 
@@ -79,7 +79,7 @@ const ContactView = () => {
                   onChange={handleInputChange}
                   className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
-                <Textarea
+                <TextArea
                   name="message"
                   placeholder="Your Message"
                   value={formData.message}

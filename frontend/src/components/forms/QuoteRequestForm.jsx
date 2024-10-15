@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/Card';
 import { Input } from '../ui/Input';
-import { Textarea } from '../ui/Textarea';
+import { TextArea } from '../ui/TextArea';
 import { Button } from '../ui/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
 import { Label } from '../ui/Label';
@@ -125,7 +125,7 @@ const QuoteRequestForm = ({ onClose, conversationId }) => {
           )}
           <div className="space-y-2">
             <Label htmlFor="projectDescription">Project Description</Label>
-            <Textarea
+            <TextArea
               id="projectDescription"
               name="projectDescription"
               placeholder="Please describe your project in detail"

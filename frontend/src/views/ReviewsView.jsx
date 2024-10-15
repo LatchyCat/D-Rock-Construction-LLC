@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/Select';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { Textarea } from "../components/ui/TextArea";
+import { TextArea } from "../components/ui/TextArea";
 import { AlertCircle, CheckCircle, Upload } from 'lucide-react';
 
 // Configure axios
@@ -173,7 +173,7 @@ const categories = [
                   required
                   className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
-                <Textarea
+                <TextArea
                   name="description"
                   placeholder="Review Description"
                   value={newReview.description}

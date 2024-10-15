@@ -4,7 +4,7 @@ import BrasilMode from '../components/BrasilMode';
 import SpanishMode from '../components/SpanishMode';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
-import { Textarea } from '../components/ui/TextArea';
+import { TextArea } from '../components/ui/TextArea';
 import { Button } from '../components/ui/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/Select';
 
@@ -209,7 +209,7 @@ const ServicesView = () => {
                   <SelectItem value="quote">{quoteOption}</SelectItem>
                 </SelectContent>
               </Select>
-              <Textarea
+              <TextArea
                 name="message"
                 placeholder={messagePlaceholder}
                 value={formData.message}
