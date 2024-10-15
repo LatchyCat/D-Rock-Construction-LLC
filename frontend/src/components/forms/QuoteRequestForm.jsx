@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
-import { Input } from '../components/ui/Input';
-import { Textarea } from '../components/ui/Textarea';
-import { Button } from '../components/ui/Button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/Select';
-import { Label } from '../components/ui/Label';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/Card';
+import { Input } from '../ui/Input';
+import { Textarea } from '../ui/Textarea';
+import { Button } from '../ui/Button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
+import { Label } from '../ui/Label';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import api from 'frontend/src/api/api.js';
+import backEndConnect from '../../api/api.js';
 
 const QuoteRequestForm = ({ onClose, conversationId }) => {
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ const QuoteRequestForm = ({ onClose, conversationId }) => {
     event.preventDefault();
     setSubmitStatus('submitting');
     try {
-      const response = await api.post('/api/submit-quote', { formData, conversationId });
+      const response = await backEndConnect.post('/api/submit-quote', { formData, conversationId });
       console.log('Quote request response:', response.data);
       setSubmitStatus('success');
       setTimeout(() => onClose(), 3000);

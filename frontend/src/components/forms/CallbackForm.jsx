@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
-import { Input } from '../components/ui/Input';
-import { Button } from '../components/ui/Button';
-import { Label } from '../components/ui/Label';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/Card';
+import { Input } from '../ui/Input';
+import { Button } from '../ui/Button';
+import { Label } from '../ui/Label';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import api from 'frontend/src/api/api.js';
+import backEndConnect from '../../api/api.js';
 
 const CallbackForm = ({ onClose, conversationId }) => {
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const CallbackForm = ({ onClose, conversationId }) => {
     e.preventDefault();
     setSubmitStatus('submitting');
     try {
-      const response = await api.post('/api/submit-callback', { formData });
+      const response = await backEndConnect.post('/api/submit-callback', { formData });
       console.log('Callback request submitted successfully:', response.data);
       setSubmitStatus('success');
       setTimeout(() => {
