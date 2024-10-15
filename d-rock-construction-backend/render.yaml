@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: d-rock-construction-backend
+    env: node
+    buildCommand: cd d-rock-construction-backend && npm install
+    startCommand: cd d-rock-construction-backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
