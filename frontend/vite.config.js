@@ -10,13 +10,19 @@ export default defineConfig({
     }
   },
   server: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: process.env.BACKEND_URL || 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 5173
   }
 })
