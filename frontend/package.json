@@ -5,11 +5,11 @@
   "type": "module",
   "description": "Frontend application for D-Rock Construction LLC, showcasing services, projects, and providing a chatbot interface for customer inquiries. Built with React and Vite.",
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview --host 0.0.0.0 --port $PORT"
-},
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview --host 0.0.0.0 --port $PORT"
+  },
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -61,5 +61,5 @@
   "bugs": {
     "url": "https://github.com/LatchyCat/D-Rock-Construction-LLC/issues"
   },
-  "homepage": "https://github.com/LatchyCat/D-Rock-Construction-LLC#readme"
+  "homepage": "https://latchycat.github.io/D-Rock-Construction-LLC/"
 }
