@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, MessageCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
-import { Textarea } from "../components/ui/textarea";
+import { Textarea } from "../components/ui/TextArea";
 import { Button } from '../components/ui/Button';
 import ChatComponent from '../components/ChatComponent';
 
