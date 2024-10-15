@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageCircle, X } from 'lucide-react';
 import ChatComponent from '@/components/ChatComponent';
