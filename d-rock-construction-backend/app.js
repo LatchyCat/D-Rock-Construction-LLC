@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const { dbConnect } = require('./config/mongoose.config');
 const createCoolDesign = require('./emojis/emojisFunc');
 const routes = require('./config/routes');
@@ -12,6 +13,12 @@ console.log('Current working directory:', process.cwd());
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)){
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 // Middleware
 app.use(express.json());
 app.use(cors({
@@ -20,6 +27,9 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -43,7 +53,6 @@ app.use((err, req, res, next) => {
   console.error('Stack trace:', err.stack);
   res.status(500).json({ error: 'Something went wrong!', details: err.message });
 });
-
 
 // Start server
 async function startServer() {

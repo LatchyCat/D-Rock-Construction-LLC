@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getHomeData } from '../api/services';
 import ChatComponent from '@/components/ChatComponent';
-import ContactForm from '../components/forms/ContactForm'
+import ContactForm from '../components/forms/ContactForm';
 
 const HomeView = () => {
   const [homeData, setHomeData] = useState(null);
@@ -16,20 +16,11 @@ const HomeView = () => {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        console.log('Fetching home data...');
         const response = await getHomeData();
-        console.log('Home data response:', response);
         setHomeData(response.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching home data:', err);
-        console.log('Error details:', {
-          message: err.message,
-          response: err.response,
-          request: err.request,
-          config: err.config
-        });
-        setError(`Failed to fetch home data: ${err.message}. ${err.response?.data?.error || ''}`);
+        setError(`Failed to fetch home data: ${err.message}`);
         setLoading(false);
       }
     };
@@ -37,46 +28,52 @@ const HomeView = () => {
     fetchHomeData();
   }, []);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
-  if (error) return <div className="text-center py-10 text-red-600">{error}</div>;
+  if (loading) return <div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div></div>;
+  if (error) return <div className="text-center py-10 text-red-600 bg-red-100 rounded-lg">{error}</div>;
+
 
   return (
-    <div className="home-view container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6">{homeData?.companyName || 'D-Rock Construction LLC'}</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">About Us</h2>
-          <p><strong>Owner:</strong> {homeData?.firstName} {homeData?.lastName}</p>
-          <p><strong>Year Started:</strong> {homeData?.yearStarted}</p>
-          <p><strong>Field of Work:</strong> {homeData?.fieldOfWork}</p>
-          <p><strong>Employees:</strong> {homeData?.employees}</p>
-        </div>
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Our Services</h2>
-          <p><strong>Specialties:</strong> {homeData?.specialties}</p>
-          <p><strong>Hours of Operation:</strong> {homeData?.hoursOfOperation}</p>
-          <p><strong>Quotes:</strong> {homeData?.quotes}</p>
-          <p><strong>Prices for Specialty Jobs:</strong> {homeData?.pricesPerSpecialtyJobs}</p>
-        </div>
-      </div>
+    <div className="home-view bg-gray-100 min-h-screen">
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-5xl font-bold mb-8 text-center text-blue-800">{homeData?.companyName || 'D-Rock Construction LLC'}</h1>
 
-      <div className="mt-8">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            console.log('Button clicked, toggling showChat');
-            setShowChat(prev => !prev);
-          }}
-        >
-          {showChat ? 'Hide Chat' : 'Show Chat'}
-        </button>
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-6 text-blue-700">About Us</h2>
+            <div className="space-y-4">
+              <p><span className="font-semibold">Owner:</span> {homeData?.firstName} {homeData?.lastName}</p>
+              <p><span className="font-semibold">Year Started:</span> {homeData?.yearStarted}</p>
+              <p><span className="font-semibold">Field of Work:</span> {homeData?.fieldOfWork}</p>
+              <p><span className="font-semibold">Employees:</span> {homeData?.employees}</p>
+            </div>
+          </div>
 
-      {showChat && (
-        <div className="mt-4">
-          <ChatComponent />
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-6 text-blue-700">Our Services</h2>
+            <div className="space-y-4">
+              <p><span className="font-semibold">Specialties:</span> {homeData?.specialties}</p>
+              <p><span className="font-semibold">Hours of Operation:</span> {homeData?.hoursOfOperation}</p>
+              <p><span className="font-semibold">Quotes:</span> {homeData?.quotes}</p>
+              <p><span className="font-semibold">Prices for Specialty Jobs:</span> {homeData?.pricesPerSpecialtyJobs}</p>
+            </div>
+          </div>
         </div>
-      )}
+
+        <div className="text-center">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
+            onClick={() => setShowChat(prev => !prev)}
+          >
+            {showChat ? 'Hide Chat' : 'Chat with Us'}
+          </button>
+        </div>
+
+        {showChat && (
+          <div className="mt-8 bg-white rounded-lg shadow-lg p-6">
+            <ChatComponent />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

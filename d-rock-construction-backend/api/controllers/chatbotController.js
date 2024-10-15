@@ -5,42 +5,36 @@ const EmailService = require('../services/EmailService');
 const ChatbotController = {
   processMessage: async function(req, res) {
     try {
-      const { message, conversationId } = req.body;
+      const { message } = req.body;
 
-      let conversation;
-      if (conversationId) {
-        conversation = await Chatbot.findById(conversationId);
-        if (!conversation) {
-          return res.status(404).json({ error: 'Conversation not found' });
-        }
+      let botResponse;
+      let options = [];
+
+      if (message.toLowerCase().includes('quote') || message.toLowerCase().includes('estimate')) {
+        botResponse = "Would you like to schedule a quote?";
+        options = [{ text: "Schedule Quote", value: "quote" }];
+      } else if (message.toLowerCase().includes('call') || message.toLowerCase().includes('schedule')) {
+        botResponse = "Would you like to schedule a call back?";
+        options = [{ text: "Request Callback", value: "callback" }];
       } else {
-        conversation = new Chatbot({
-          conversationType: 'unknown',
-          messages: [],
-          status: 'active'
-        });
+        botResponse = "I can help you schedule a quote or request a callback. Which would you like to do?";
+        options = [
+          { text: "Schedule Quote", value: "quote" },
+          { text: "Request Callback", value: "callback" }
+        ];
       }
-
-      conversation.addMessage('user', message);
-
-      const intent = ChatbotController.classifyIntent(message);
-      const { botResponse, formFields } = ChatbotController.generateResponse(intent);
-      conversation.addMessage('bot', botResponse);
-      conversation.changeConversationType(intent);
-
-      await conversation.save();
 
       res.json({
         response: botResponse,
-        intent: intent,
-        formFields: formFields,
-        conversationId: conversation._id
+        options: options
       });
     } catch (error) {
       console.error('Error in processMessage:', error);
       res.status(500).json({ error: 'An error occurred while processing the message' });
     }
   },
+
+
 
   submitForm: async function(req, res) {
     try {
@@ -74,6 +68,33 @@ const ChatbotController = {
     } catch (error) {
       console.error('Error in submitForm:', error);
       res.status(500).json({ error: 'An error occurred while submitting the form' });
+    }
+  },
+
+  handleOption: async function(req, res) {
+    try {
+      const { option } = req.body;
+
+      let response;
+      let formFields;
+
+      if (option === 'quote') {
+        response = "Great! To schedule a quote, please provide the following information:";
+        formFields = ['name', 'email', 'phone', 'projectType', 'projectDescription', 'estimatedBudget'];
+      } else if (option === 'callback') {
+        response = "Certainly! To schedule a callback, please provide the following information:";
+        formFields = ['name', 'phone', 'email', 'preferredDate', 'preferredTime'];
+      } else {
+        return res.status(400).json({ error: 'Invalid option' });
+      }
+
+      res.json({
+        response: response,
+        formFields: formFields
+      });
+    } catch (error) {
+      console.error('Error in handleOption:', error);
+      res.status(500).json({ error: 'An error occurred while processing the option' });
     }
   },
 
