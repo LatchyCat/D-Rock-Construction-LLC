@@ -6,6 +6,7 @@ const fs = require('fs');
 const { dbConnect } = require('./config/mongoose.config');
 const createCoolDesign = require('./emojis/emojisFunc');
 const routes = require('./config/routes');
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://192.168.1.193:5173,https://d-rock-construction-llc.onrender.com').split(',');
 
 console.log('Environment variables loaded:', process.env.MONGODB_URI ? 'Yes' : 'No');
 console.log('Current working directory:', process.cwd());
@@ -22,7 +23,15 @@ if (!fs.existsSync(uploadsDir)){
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://d-rock-construction-llc.onrender.com',
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
