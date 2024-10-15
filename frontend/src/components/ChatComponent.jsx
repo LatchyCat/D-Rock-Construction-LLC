@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/ScrollArea';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
+import { ScrollArea } from '../components/ui/ScrollArea';
 import { Send, Loader } from 'lucide-react';
 import CallbackForm from '../components/forms/CallbackForm';
 import QuoteRequestForm from '../components/forms/QuoteRequestForm';

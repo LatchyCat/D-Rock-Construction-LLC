@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getHomeData } from '../api/services';
-import ChatComponent from '@/components/ChatComponent';
+import ChatComponent from '../components/ChatComponent';
 import ContactForm from '../components/forms/ContactForm';
 
 const HomeView = () => {

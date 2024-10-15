@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
+import { Input } from '../components/ui/Input';
+import { Textarea } from '../components/ui/Textarea';
+import { Button } from '../components/ui/Button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/Select';
+import { Label } from '../components/ui/Label';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import api from '/Users/latchy/d-rock-construction/frontend/src/api/api.js';
+import api from 'frontend/src/api/api.js';
 
 const QuoteRequestForm = ({ onClose, conversationId }) => {
   const [formData, setFormData] = useState({

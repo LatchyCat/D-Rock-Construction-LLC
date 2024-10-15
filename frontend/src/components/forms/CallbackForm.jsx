@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
+import { Input } from '../components/ui/Input';
+import { Button } from '../components/ui/Button';
+import { Label } from '../components/ui/Label';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import api from '/Users/latchy/d-rock-construction/frontend/src/api/api.js';
+import api from 'frontend/src/api/api.js';
 
 const CallbackForm = ({ onClose, conversationId }) => {
   const [formData, setFormData] = useState({
