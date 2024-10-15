@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import path from 'path'
+import { defineConfig } from 'vite';  // Add this line
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/D-Rock-Construction-LLC/', // Add this line
+  base: '',  // Correct base setting
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
@@ -25,4 +25,4 @@ export default defineConfig({
     host: '0.0.0.0',
     port: process.env.PORT || 5173
   }
-})
+});
