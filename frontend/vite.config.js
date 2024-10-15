@@ -14,10 +14,9 @@ export default defineConfig({
     port: process.env.PORT || 5173,
     proxy: {
       '/api': {
-        target: process.env.BACKEND_URL || 'http://localhost:8000',
+        target: process.env.VITE_API_URL || 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   },
