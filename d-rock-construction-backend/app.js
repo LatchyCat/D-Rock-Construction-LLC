@@ -60,9 +60,13 @@ async function startServer() {
     await dbConnect();
     app.listen(PORT, () => {
       console.log(`Server is successfully launched and operational on port: ${PORT}\n`);
-      createCoolDesign();
-      createCoolDesign();
-      createCoolDesign();
+      try {
+        createCoolDesign();
+        createCoolDesign();
+        createCoolDesign();
+      } catch (error) {
+        console.error('Error in createCoolDesign:', error);
+      }
     });
   } catch (error) {
     console.error('Failed to start server:', error);

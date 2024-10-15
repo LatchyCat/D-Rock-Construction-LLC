@@ -44,30 +44,35 @@ function getRandomEmojiArray() {
 
 // Function to create a cool design with emojis
 function createCoolDesign() {
-  let design = "";
-  const emojisArray = getRandomEmojiArray(); // Get a random array of emojis
+  try {
+    let design = "";
+    const emojisArray = getRandomEmojiArray(); // Get a random array of emojis
 
-  const terminalWidth = process.stdout.columns; // Get the width of the terminal
+    const terminalWidth = process.stdout.columns || 80; // Get the width of the terminal, default to 80 if undefined
 
-  // Calculate the number of columns and rows based on the terminal width and the number of emojis
-  const numCols = Math.ceil(Math.sqrt(emojisArray.length * (terminalWidth / 2))); // (terminalWidth / 2) approximates the aspect ratio of emojis
-  const numRows = Math.ceil(emojisArray.length / numCols);
+    // Calculate the number of columns and rows based on the terminal width and the number of emojis
+    const numCols = Math.min(Math.ceil(Math.sqrt(emojisArray.length * (terminalWidth / 2))), 50); // Limit to 50 columns
+    const numRows = Math.min(Math.ceil(emojisArray.length / numCols), 20); // Limit to 20 rows
 
-  // Choose a random pattern
-  const patterns = [
-    createGridPattern,
-    createDiagonalPattern,
-    createCircularPattern,
-    createRandomPattern
-  ];
-  const chosenPattern = getRandomItem(patterns);
+    // Choose a random pattern
+    const patterns = [
+      createGridPattern,
+      createDiagonalPattern,
+      createCircularPattern,
+      createRandomPattern
+    ];
+    const chosenPattern = getRandomItem(patterns);
 
-  // Apply the chosen pattern
-  design = chosenPattern(emojisArray, numRows, numCols);
+    // Apply the chosen pattern
+    design = chosenPattern(emojisArray, numRows, numCols);
 
-  // Print the design
-  console.log(design);
-  return emojisArray;
+    // Print the design
+    console.log(design);
+    return emojisArray;
+  } catch (error) {
+    console.error('Error in createCoolDesign:', error);
+    return []; // Return an empty array in case of error
+  }
 }
 
 // Pattern: Grid
@@ -102,33 +107,43 @@ function createDiagonalPattern(emojisArray, numRows, numCols) {
 
 // Pattern: Circular
 function createCircularPattern(emojisArray, numRows, numCols) {
-  let design = Array(numRows).fill().map(() => Array(numCols).fill(" "));
-  let index = 0;
-  let top = 0, bottom = numRows - 1, left = 0, right = numCols - 1;
-
-  while (top <= bottom && left <= right && index < emojisArray.length) {
-    for (let i = left; i <= right && index < emojisArray.length; i++)
-      design[top][i] = emojisArray[index++];
-    top++;
-
-    for (let i = top; i <= bottom && index < emojisArray.length; i++)
-      design[i][right] = emojisArray[index++];
-    right--;
-
-    if (top <= bottom) {
-      for (let i = right; i >= left && index < emojisArray.length; i--)
-        design[bottom][i] = emojisArray[index++];
-      bottom--;
+  try {
+    if (numRows <= 0 || numCols <= 0 || numRows > 1000 || numCols > 1000) {
+      console.error('Invalid dimensions:', numRows, numCols);
+      return ''; // Return an empty string in case of invalid dimensions
     }
 
-    if (left <= right) {
-      for (let i = bottom; i >= top && index < emojisArray.length; i--)
-        design[i][left] = emojisArray[index++];
-      left++;
+    let design = Array(numRows).fill().map(() => Array(numCols).fill(" "));
+    let index = 0;
+    let top = 0, bottom = numRows - 1, left = 0, right = numCols - 1;
+
+    while (top <= bottom && left <= right && index < emojisArray.length) {
+      for (let i = left; i <= right && index < emojisArray.length; i++)
+        design[top][i] = emojisArray[index++];
+      top++;
+
+      for (let i = top; i <= bottom && index < emojisArray.length; i++)
+        design[i][right] = emojisArray[index++];
+      right--;
+
+      if (top <= bottom) {
+        for (let i = right; i >= left && index < emojisArray.length; i--)
+          design[bottom][i] = emojisArray[index++];
+        bottom--;
+      }
+
+      if (left <= right) {
+        for (let i = bottom; i >= top && index < emojisArray.length; i--)
+          design[i][left] = emojisArray[index++];
+        left++;
+      }
     }
+
+    return design.map(row => row.join(" ")).join("\n");
+  } catch (error) {
+    console.error('Error in createCircularPattern:', error);
+    return ''; // Return an empty string in case of error
   }
-
-  return design.map(row => row.join(" ")).join("\n");
 }
 
 // Pattern: Random

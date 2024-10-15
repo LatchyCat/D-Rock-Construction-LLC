@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const createCoolDesign = require('../emojis/emojisFunc');
 
 dotenv.config();
 
@@ -21,12 +20,10 @@ async function dbConnect(retries = MAX_RETRIES) {
     try {
         await mongoose.connect(MONGODB_URI, {
             dbName: 'drockconstructionDB'
-            // Remove useNewUrlParser and useUnifiedTopology options
         });
 
-        console.log("Successfully connected to MongoDB!\n");
+        console.log("Successfully connected to MongoDB!");
         console.log(`Port: ${process.env.PORT || 8000} / Dev Mode Activated\n`);
-        createCoolDesign(); createCoolDesign(); createCoolDesign();
 
     } catch (error) {
         console.error(`Error connecting to MongoDB (attempt ${MAX_RETRIES - retries + 1} of ${MAX_RETRIES}): `, error.message);
